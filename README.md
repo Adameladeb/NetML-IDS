@@ -32,6 +32,57 @@ To run the code, the following dependencies are required:
 
 ⚠️ Note: It is assumed that the dataset file is correctly preprocessed and formatted with features and labels. Adjustments may be necessary to handle different datasets or preprocessing steps.
 
+Anomaly Detection using Autoencoder and ResNet50 Models
+
+This code implements an anomaly detection system using two models: an autoencoder and a fine-tuned ResNet50 model.
+Dataset
+
+The dataset used in this code is the UNSW-NB15 dataset, which contains network traffic data for intrusion detection. The dataset is preprocessed and split into training and testing sets using a 80:20 ratio.
+Autoencoder Model
+
+The autoencoder model is used to learn the features of the input data. The learned features are then used for anomaly detection using Isolation Forest. The architecture of the autoencoder model is as follows:
+
+    Input layer: 1D convolutional layer with 32 filters, kernel size of 3, and ReLU activation function.
+    Batch normalization layer.
+    Max pooling layer with pool size of 2.
+    1D convolutional layer with 64 filters, kernel size of 3, and ReLU activation function.
+    Batch normalization layer.
+    Max pooling layer with pool size of 2.
+    1D convolutional layer with 128 filters, kernel size of 3, and ReLU activation function.
+    Batch normalization layer.
+    Max pooling layer with pool size of 2.
+    1D convolutional layer with 128 filters, kernel size of 3, and ReLU activation function.
+    Batch normalization layer.
+    Up-sampling layer with size of 2.
+    1D convolutional layer with 64 filters, kernel size of 3, and ReLU activation function.
+    Batch normalization layer.
+    Up-sampling layer with size of 2.
+    1D convolutional layer with 32 filters, kernel size of 3, and ReLU activation function.
+    Batch normalization layer.
+    Up-sampling layer with size of 2.
+    Output layer: 1D convolutional layer with 1 filter, kernel size of 3, and sigmoid activation function.
+
+The autoencoder model is trained for 10 epochs using binary cross-entropy loss and the Adam optimizer. The learned features are obtained from the encoder part of the autoencoder model.
+Anomaly Detection using Isolation Forest
+
+The learned features are used as input to the Isolation Forest algorithm for anomaly detection. The algorithm is used to predict anomalies in the test set with a 5% contamination rate.
+Fine-tuned ResNet50 Model
+
+The ResNet50 model is fine-tuned for anomaly detection using the learned features from the autoencoder model. The architecture of the model is as follows:
+
+    Input layer: ResNet50 with pre-trained weights on ImageNet dataset.
+    Flatten layer.
+    Dense layer with 256 units and ReLU activation function.
+    Dropout layer with rate of 0.5.
+    Output layer: Dense layer with 1 unit and sigmoid activation function.
+
+The ResNet50 model is trained for 10 epochs using binary cross-entropy loss and the Adam optimizer. The model is fine-tuned on the learned features from the autoencoder model for anomaly detection.
+Ensemble Model
+
+An ensemble model is created by combining the autoencoder and ResNet50 models. The ensemble model takes the input data and generates features using the autoencoder model. The features are then used as input to the ResNet50 model and two additional ResNet50 models to generate predictions. The predictions from the three models are then averaged to generate the final output of the ensemble model.
+
+The ensemble model is evaluated on the test set using binary cross-entropy loss and accuracy as the evaluation metrics.
+
 ## Model Overview
 The code implements an autoencoder-based anomaly detection and classification model. The autoencoder is trained to reconstruct the input data and learn useful representations in its hidden layers. The learned features from the encoder part are then used as inputs to a separate classifier model for binary classification (normal vs. intrusion).
 

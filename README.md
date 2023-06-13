@@ -1,46 +1,42 @@
-# NetML-IDS
+NetML-IDS 🕵️‍♀️
 
 📚 This README provides an overview and usage instructions for the NetML-IDS. 🖥️
+Description 📝
 
-## Description
 The provided code demonstrates the implementation of an autoencoder-based anomaly detection and classification model using TensorFlow. The code performs the following steps:
 
-1. Load the preprocessed dataset (`UNSW_NB15_training-set.csv`) consisting of features and labels.
-2. Split the dataset into training and testing sets.
-3. Reshape the input data to prepare it for the autoencoder model.
-4. Create the encoder model using 1D convolutional layers and max pooling.
-5. Create the decoder model using convolutional layers and upsampling.
-6. Combine the encoder and decoder to create an autoencoder model.
-7. Compile and train the autoencoder model using the training data.
-8. Obtain the learned features from the encoder part of the autoencoder.
-9. Create the classifier model using dense layers.
-10. Combine the encoder and classifier to create a classification model.
-11. Compile and train the classification model using the learned features and corresponding labels.
-12. Evaluate the classification model using the testing data and calculate the loss and accuracy.
-13. Print the test loss and test accuracy. ✔️
+    Load the preprocessed dataset (UNSW_NB15_training-set.csv) consisting of features and labels.
+    Split the dataset into training and testing sets.
+    Reshape the input data to prepare it for the autoencoder model.
+    Create the encoder model using 1D convolutional layers and max pooling.
+    Create the decoder model using convolutional layers and upsampling.
+    Combine the encoder and decoder to create an autoencoder model.
+    Compile and train the autoencoder model using the training data.
+    Obtain the learned features from the encoder part of the autoencoder.
+    Create the classifier model using dense layers.
+    Combine the encoder and classifier to create a classification model.
+    Compile and train the classification model using the learned features and corresponding labels.
+    Evaluate the classification model using the testing data and calculate the loss and accuracy.
+    Print the test loss and test accuracy. ✔️
 
-## Requirements
+Requirements 🛠️
+
 To run the code, the following dependencies are required:
-- NumPy (`pip install numpy`)
-- TensorFlow (`pip install tensorflow`)
-- scikit-learn (`pip install scikit-learn`)
 
-## Usage
-1. Ensure that the dataset file `UNSW_NB15_training-set.csv` is located in the same directory as the code file.
-2. Install the required dependencies if not already installed.
-3. Execute the code in a Python environment.
+    NumPy (pip install numpy) 🧮
+    TensorFlow (pip install tensorflow) 🤖
+    scikit-learn (pip install scikit-learn) 🧪
+
+Usage 💻
+
+    Ensure that the dataset file UNSW_NB15_training-set.csv is located in the same directory as the code file.
+    Install the required dependencies if not already installed.
+    Execute the code in a Python environment.
 
 ⚠️ Note: It is assumed that the dataset file is correctly preprocessed and formatted with features and labels. Adjustments may be necessary to handle different datasets or preprocessing steps.
+Anomaly Detection using Autoencoder Model 🚨
 
-Anomaly Detection using Autoencoder and ResNet50 Models
-
-This code implements an anomaly detection system using two models: an autoencoder and a fine-tuned ResNet50 model.
-Dataset
-
-The dataset used in this code is the UNSW-NB15 dataset, which contains network traffic data for intrusion detection. The dataset is preprocessed and split into training and testing sets using a 80:20 ratio.
-Autoencoder Model
-
-The autoencoder model is used to learn the features of the input data. The learned features are then used for anomaly detection using Isolation Forest. The architecture of the autoencoder model is as follows:
+This code implements an anomaly detection system using an autoencoder model. The architecture of the autoencoder model is as follows:
 
     Input layer: 1D convolutional layer with 32 filters, kernel size of 3, and ReLU activation function.
     Batch normalization layer.
@@ -54,6 +50,16 @@ The autoencoder model is used to learn the features of the input data. The learn
     1D convolutional layer with 128 filters, kernel size of 3, and ReLU activation function.
     Batch normalization layer.
     Up-sampling layer with size of 2.
+
+Classification using Classifier Model 📊
+
+The learned features from the autoencoder are used to train a classifier model using dense layers. The final model is a combination of the encoder and the classifier.
+Evaluation Metrics 📉
+
+The classification model is evaluated on the test set using binary cross-entropy loss and accuracy as the evaluation metrics.
+Dataset 📂
+
+The dataset used in this code is the UNSW-NB15 dataset, which contains network traffic data for intrusion detection. The dataset is preprocessed and split into training and testing sets using a 80:20 ratio.
     1D convolutional layer with 64 filters, kernel size of 3, and ReLU activation function.
     Batch normalization layer.
     Up-sampling layer with size of 2.
